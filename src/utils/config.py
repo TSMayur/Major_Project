@@ -20,11 +20,17 @@ os.environ["TOKENIZERS_PARALLELISM"] = "false"
 @dataclass
 class ModelConfig:
     """Model configuration"""
+    # 1. GPT4All: Ensure this file exists in your project root or models folder
     gpt4all_model_name: str = "Llama-3.2-1B-Instruct-Q4_0.gguf"
-    embedding_model_name: str = "all-MiniLM-L6-v2"
-    clip_model_name: str = "openai/clip-vit-base-patch32"
-    # Changed from 'base' to 'tiny.en' for standard transformers implementation
-    whisper_model_size: str = "tiny.en" 
+    
+    # 2. Embeddings: Point to LOCAL folder, not "all-MiniLM-L6-v2"
+    embedding_model_name: str = os.path.join(os.getcwd(), "models", "text_embedder")
+    
+    # 3. CLIP: Point to LOCAL folder, not "openai/clip-vit-base-patch32"
+    clip_model_name: str = os.path.join(os.getcwd(), "models", "clip")
+    
+    # 4. Whisper: Point to LOCAL folder, not "tiny.en"
+    whisper_model_size: str = os.path.join(os.getcwd(), "models", "whisper")
 
 @dataclass
 class AudioConfig:

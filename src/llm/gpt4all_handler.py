@@ -24,11 +24,18 @@ class GPT4AllHandler:
         """Initialize GPT4All model"""
         try:
             print(f"[INFO] Loading GPT4All model: {self.model_name}")
-            self.model = GPT4All(self.model_name)
+            
+            # --- FIX: Set allow_download=False to prevent internet connection ---
+            # Ensure the .gguf file is actually inside your project folder!
+            self.model = GPT4All(
+                self.model_name, 
+                model_path=os.getcwd(),  # Looks in current directory
+                allow_download=False     # <--- CRITICAL FOR OFFLINE
+            )
             print("[INFO] GPT4All model loaded successfully")
         except Exception as e:
             print(f"[ERROR] Failed to load GPT4All model: {e}")
-            raise
+            raise RuntimeError("Model initialization failed")
     
     def generate_response(self, prompt: str, max_tokens: int = None, 
                          temperature: float = None, streaming: bool = False) -> str:

@@ -1,11 +1,11 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter, Merriweather } from "next/font/google"
+// REMOVED: import { Inter, Merriweather } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 
-const _inter = Inter({ subsets: ["latin"] })
-const _merriweather = Merriweather({ weight: ["300", "700"], subsets: ["latin"] })
+// REMOVED: const _inter = ...
+// REMOVED: const _merriweather = ...
 
 export const metadata: Metadata = {
   title: "EdgeLearn - AI Tutor",
@@ -37,7 +37,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${_inter.className} antialiased`}>
+      {/* REMOVED: _inter.className */}
+      {/* ADDED: font-sans to use the system font defined in globals.css */}
+      <body className={`antialiased font-sans`}>
         {children}
         <Analytics />
       </body>
